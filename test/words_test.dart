@@ -1,4 +1,4 @@
-import 'package:flutter_test/flutter_test.dart';
+import 'package:test/test.dart';
 import 'package:indian_number_utils/indian_number_utils.dart';
 
 void main() {

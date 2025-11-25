@@ -25,37 +25,50 @@ String formatIndianCompact(
   IndianCompactUnit unit = IndianCompactUnit.none;
   num divisor = 1;
 
-  if (v >= 1e7) {
+  // Determine scale
+  if (v >= 10000000) {
     unit = IndianCompactUnit.crore;
-    divisor = 1e7; // 1 crore
-  } else if (v >= 1e5) {
+    divisor = 10000000; // 1 crore
+  } else if (v >= 100000) {
     unit = IndianCompactUnit.lakh;
-    divisor = 1e5; // 1 lakh
-  } else if (v >= 1e3) {
+    divisor = 100000; // 1 lakh
+  } else if (v >= 1000) {
     unit = IndianCompactUnit.thousand;
-    divisor = 1e3;
+    divisor = 1000;
   }
 
+  // No compact unit → return plain number
   if (unit == IndianCompactUnit.none) {
     return _withSign(v.toStringAsFixed(0), isNegative);
   }
 
   final scaled = v / divisor;
-  // Clamp decimals to non-negative
+
+  // Clamp decimals (can't be negative)
   final dp = decimals < 0 ? 0 : decimals;
   String text = scaled.toStringAsFixed(dp);
 
-  // Remove trailing zeros and decimal point if unnecessary
+  // Remove trailing zeros and optional decimal point
   if (text.contains('.')) {
     text = text.replaceFirst(RegExp(r'\.?0+$'), '');
   }
 
-  final suffix = switch (unit) {
-    IndianCompactUnit.thousand => 'K',
-    IndianCompactUnit.lakh => 'L',
-    IndianCompactUnit.crore => 'Cr',
-    IndianCompactUnit.none => '',
-  };
+  // Old stable Dart doesn't support switch-expressions → use standard switch
+  String suffix;
+  switch (unit) {
+    case IndianCompactUnit.thousand:
+      suffix = 'K';
+      break;
+    case IndianCompactUnit.lakh:
+      suffix = 'L';
+      break;
+    case IndianCompactUnit.crore:
+      suffix = 'Cr';
+      break;
+    case IndianCompactUnit.none:
+    default:
+      suffix = '';
+  }
 
   return _withSign('$text$suffix', isNegative);
 }

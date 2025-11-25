@@ -1,39 +1,113 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Indian Number Utils
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/tools/pub/writing-package-pages).
+A lightweight and powerful utility package for formatting and converting numbers using the **Indian numbering system** (lakh/crore).  
+Perfect for **fintech, ecommerce, dashboards, calculators, banking apps**, and any app targeting the Indian market.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/to/develop-packages).
--->
+## ✨ Features
 
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+- ✔ Indian comma formatting  
+- ✔ Compact formatting (K / L / Cr)  
+- ✔ Number-to-words (Indian style)  
+- ✔ Supports negative values  
+- ✔ Zero dependencies  
+- ✔ Works in Dart & Flutter apps  
+- ✔ Clean API, production-ready  
 
-## Features
+## 📦 Installation
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Add to your `pubspec.yaml`:
 
-## Getting started
-
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
-```dart
-const like = 'sample';
+```yaml
+dependencies:
+  indian_number_utils: ^0.1.0
 ```
 
-## Additional information
+Then import in your Dart/Flutter code:
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+```dart
+import 'package:indian_number_utils/indian_number_utils.dart';
+```
+
+## 🚀 Usage
+
+### 1. Indian Number Formatting (1,23,45,678)
+
+Format numbers with Indian-style comma separators:
+
+```dart
+formatIndianNumber(1234);        // 1,234
+formatIndianNumber(1234567);     // 12,34,567
+formatIndianNumber(123456789);   // 12,34,56,789
+formatIndianNumber(-50000);      // -50,000
+```
+
+### 2. Compact Number Formatting (1.2K / 1.5L / 1.23Cr)
+
+Format large numbers in a compact, human-readable format:
+
+```dart
+formatIndianCompact(950);          // 950
+formatIndianCompact(1200);         // 1.2K
+formatIndianCompact(150000);       // 1.5L
+formatIndianCompact(12345678);     // 1.23Cr
+formatIndianCompact(-150000);      // -1.5L
+formatIndianCompact(123456789, decimals: 3);  // 12.346Cr
+```
+
+### 3. Number to Words (Indian Style)
+
+Convert numbers to their word representation:
+
+```dart
+indianNumberToWords(0);          // zero
+indianNumberToWords(15);         // fifteen
+indianNumberToWords(1234);       // one thousand two hundred thirty four
+indianNumberToWords(150000);     // one lakh fifty thousand
+indianNumberToWords(12345678);   // one crore twenty three lakh forty five thousand six hundred seventy eight
+indianNumberToWords(-123);       // minus one hundred twenty three
+```
+
+### 4. Advanced Usage
+
+#### Customizing Compact Formatting
+
+You can customize the number of decimal places in compact formatting:
+
+```dart
+formatIndianCompact(12345678, decimals: 1);    // 1.2Cr
+formatIndianCompact(12345678, decimals: 0);    // 1Cr
+```
+
+#### Using IndianCompactUnit
+
+The package also exports an `IndianCompactUnit` enum that represents the different compact units used:
+
+```dart
+enum IndianCompactUnit {
+  none,    // No unit (e.g., 999)
+  thousand,// K (e.g., 1.2K)
+  lakh,    // L (e.g., 1.5L)
+  crore,   // Cr (e.g., 1.23Cr)
+}
+```
+
+## 🧪 Example App
+
+Try the example app to see the package in action:
+
+```bash
+cd example
+flutter run
+```
+
+Or run directly:
+
+```bash
+flutter run -t lib/main.dart
+```
+
+The example demonstrates all the features with interactive examples.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

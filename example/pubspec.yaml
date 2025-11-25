@@ -1,0 +1,15 @@
+name: indian_number_utils_example
+description: Example app demonstrating the usage of indian_number_utils.
+publish_to: "none" # example apps should not be published
+
+environment:
+  sdk: ">=2.18.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  indian_number_utils:
+    path: ../
+
+flutter:
+  uses-material-design: true

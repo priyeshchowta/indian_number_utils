@@ -1,15 +1,22 @@
 name: indian_number_utils
-description: Utilities for formatting and converting numbers using the Indian numbering system (lakh/crore, compact, words).
+description: A lightweight utility package for Indian number formatting, compact formats (K/L/Cr), and number-to-words conversion.
 version: 0.1.0
 homepage: https://github.com/priyeshchowta/indian_number_utils
+repository: https://github.com/priyeshchowta/indian_number_utils
+issue_tracker: https://github.com/priyeshchowta/indian_number_utils/issues
 
 environment:
   sdk: ">=2.18.0 <4.0.0"
 
 # dependencies:
-  # no runtime deps needed for now
+  # No runtime dependencies needed
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   lints: ^6.0.0
+  test: ^1.24.0
+
+flutter:
+  # This is needed so Flutter tools don't warn
+  uses-material-design: true
